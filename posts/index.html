@@ -153,6 +153,30 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">C&#43;&#43; Modules
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>通过cmake来构建C&#43;&#43; Modules的项目 编译环境 cmake版本=4.0.3 clang或gcc或者vs2022(注意下支持c&#43;&#43;23的版本) ninga 使用STD Module 现有目录如下
+项目根目录/ │ ├── CMakeLists.txt │ └── main.cpp // main.cpp import std; int main() { std::println(&#34;Hello, C&#43;&#43;23 STD Module!&#34;); } 要让其编译成功，需要设置CMakeLists.txt的变量：
+设置CXX_MODULE_STD或CMAKE_CXX_MODULE_STD变量为ON。 C&#43;&#43;版本设为23。 设置STD Module的实验性UUID。 cmake_minimum_required(VERSION 4.0.3) set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD &#34;d0edc3af-4c50-42ea-a356-e2862fe7a444&#34;) project(hello) # 使用全局变量 set(CMAKE_CXX_MODULE_STD ON) set(CMAKE_CXX_STANDARD 23) add_executable(hello main.cpp) 关于cmake模块支持的文档，可以查看
+关于cmake实验性UUID 查询实验性UUID需前往CMake的Github仓库或Gitlab仓库，在项目的Help/dev/experimental.rst文件中，可以找到C&#43;&#43; import std support栏目，提供了相关内容。
+需要注意的是，此UUID与CMake版本挂钩，必须使用和你版本匹配的Tag下的UUID。你可以在本地通过cmake --version命令查看本地CMake版本。
+最后，生成配置时指定生成器为ninga。
+cmake -B build -G &#34;Ninja&#34; </p>
+  </div>
+  <footer class="entry-footer"><span title='2025-07-13 17:25:37 +0800 +0800'>2025年07月13日</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;zhb1990</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; Modules" href="https://zhb1990.github.io/posts/c&#43;&#43;-modules/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">First Post
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">

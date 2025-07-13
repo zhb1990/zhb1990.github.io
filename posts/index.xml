@@ -6,8 +6,65 @@
     <description>Recent content in Posts on zhb1990&#39;s blog</description>
     <generator>Hugo -- 0.148.1</generator>
     <language>zh</language>
-    <lastBuildDate>Sat, 12 Jul 2025 16:10:18 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 13 Jul 2025 17:25:37 +0800</lastBuildDate>
     <atom:link href="https://zhb1990.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43; Modules</title>
+      <link>https://zhb1990.github.io/posts/c&#43;&#43;-modules/</link>
+      <pubDate>Sun, 13 Jul 2025 17:25:37 +0800</pubDate>
+      <guid>https://zhb1990.github.io/posts/c&#43;&#43;-modules/</guid>
+      <description>&lt;h1 id=&#34;通过cmake来构建c-modules的项目&#34;&gt;通过&lt;code&gt;cmake&lt;/code&gt;来构建&lt;code&gt;C++ Modules&lt;/code&gt;的项目&lt;/h1&gt;
+&lt;h2 id=&#34;编译环境&#34;&gt;编译环境&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;cmake&lt;/code&gt;版本=&lt;code&gt;4.0.3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;clang&lt;/code&gt;或&lt;code&gt;gcc&lt;/code&gt;或者&lt;code&gt;vs2022&lt;/code&gt;(注意下支持&lt;code&gt;c++23&lt;/code&gt;的版本)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ninga&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;使用std-module&#34;&gt;使用&lt;code&gt;STD Module&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;现有目录如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;项目根目录/
+│
+├── CMakeLists.txt
+│
+└── main.cpp
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// main.cpp
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Hello, C++23 STD Module!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;要让其编译成功，需要设置&lt;code&gt;CMakeLists.txt&lt;/code&gt;的变量：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;设置&lt;code&gt;CXX_MODULE_STD&lt;/code&gt;或&lt;code&gt;CMAKE_CXX_MODULE_STD&lt;/code&gt;变量为&lt;code&gt;ON&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C++&lt;/code&gt;版本设为23。&lt;/li&gt;
+&lt;li&gt;设置&lt;code&gt;STD Module&lt;/code&gt;的实验性&lt;code&gt;UUID&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmake&#34; data-lang=&#34;cmake&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cmake_minimum_required&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;VERSION&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;4.0.3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;CMAKE_EXPERIMENTAL_CXX_IMPORT_STD&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;d0edc3af-4c50-42ea-a356-e2862fe7a444&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;project&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 使用全局变量
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;CMAKE_CXX_MODULE_STD&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;ON&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;CMAKE_CXX_STANDARD&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;add_executable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;hello&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;main.cpp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;关于&lt;code&gt;cmake&lt;/code&gt;模块支持的文档，&lt;a href=&#34;https://cmake.org/cmake/help/latest/manual/cmake-cxxmodules.7.html&#34;&gt;可以查看&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+
+
+&lt;p&gt;&lt;details &gt;
+  &lt;summary markdown=&#34;span&#34;&gt;&lt;strong&gt;关于&lt;code&gt;cmake&lt;/code&gt;实验性&lt;code&gt;UUID&lt;/code&gt;&lt;/strong&gt;&lt;/summary&gt;
+  &lt;p&gt;查询实验性&lt;code&gt;UUID&lt;/code&gt;需前往&lt;code&gt;CMake&lt;/code&gt;的&lt;a href=&#34;https://github.com/Kitware/CMake&#34;&gt;Github仓库&lt;/a&gt;或&lt;a href=&#34;https://gitlab.kitware.com/cmake&#34;&gt;Gitlab仓库&lt;/a&gt;，在项目的&lt;code&gt;Help/dev/experimental.rst&lt;/code&gt;文件中，可以找到&lt;code&gt;C++ import std support&lt;/code&gt;栏目，提供了相关内容。&lt;/p&gt;
+&lt;p&gt;需要注意的是，此&lt;code&gt;UUID&lt;/code&gt;与&lt;code&gt;CMake&lt;/code&gt;版本挂钩，必须使用和你版本匹配的&lt;code&gt;Tag&lt;/code&gt;下的&lt;code&gt;UUID&lt;/code&gt;。你可以在本地通过&lt;code&gt;cmake --version&lt;/code&gt;命令查看本地&lt;code&gt;CMake&lt;/code&gt;版本。&lt;/p&gt;
+
+&lt;/details&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最后，生成配置时指定生成器为&lt;code&gt;ninga&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cmake -B build -G &lt;span class=&#34;s2&#34;&gt;&amp;#34;Ninja&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     <item>
       <title>First Post</title>
       <link>https://zhb1990.github.io/posts/first-post/</link>
