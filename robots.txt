@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://zhb1990.github.io/sitemap.xml
