@@ -178,7 +178,9 @@
 关于cmake实验性UUID 查询实验性UUID需前往CMake的Github仓库或Gitlab仓库，在项目的Help/dev/experimental.rst文件中，可以找到C&#43;&#43; import std support栏目，提供了相关内容。
 需要注意的是，此UUID与CMake版本挂钩，必须使用和你版本匹配的Tag下的UUID。你可以在本地通过cmake --version命令查看本地CMake版本。
 最后，生成配置时指定生成器为ninga。
-cmake -B build -G &#34;Ninja&#34; </p>
+cmake -B build -G &#34;Ninja&#34; 关于windows上编译 上述操作须在vs2022的环境下，可以在Microsoft.PowerShell_profile.ps1中增加下面的函数
+function vs2022 { $vsPath = &amp; &#34;${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe&#34; ` -version 17.0 -products * -property installationPath if (-not $vsPath) { Write-Error &#34;Visual Studio 2022 not found!&#34; return } &amp; &#34;$vsPath\Common7\Tools\Launch-VsDevShell.ps1&#34; -SkipAutomaticLocation -Arch amd64 -HostArch amd64 } 然后在执行cmake命令前执行下vs2022。
+...</p>
   </div>
   <footer class="entry-footer"><span title='2025-07-13 17:25:37 +0800 +0800'>2025年07月13日</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;zhb1990</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; Module" href="https://zhb1990.github.io/posts/c&#43;&#43;-module/"></a>

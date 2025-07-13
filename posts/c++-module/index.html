@@ -57,7 +57,23 @@ add_executable(hello main.cpp)
 
 最后，生成配置时指定生成器为ninga。
 cmake -B build -G &#34;Ninja&#34;
-">
+
+
+
+
+  关于windows上编译
+  上述操作须在vs2022的环境下，可以在Microsoft.PowerShell_profile.ps1中增加下面的函数
+function vs2022 {
+    $vsPath = &amp; &#34;${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe&#34; `
+        -version 17.0 -products * -property installationPath
+    if (-not $vsPath) {
+        Write-Error &#34;Visual Studio 2022 not found!&#34;
+        return
+    }
+
+    &amp; &#34;$vsPath\Common7\Tools\Launch-VsDevShell.ps1&#34; -SkipAutomaticLocation -Arch amd64 -HostArch amd64
+}
+然后在执行cmake命令前执行下vs2022。">
 <meta name="author" content="zhb1990">
 <link rel="canonical" href="https://zhb1990.github.io/posts/c&#43;&#43;-module/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
@@ -114,7 +130,8 @@ cmake -B build -G &#34;Ninja&#34;
 关于cmake实验性UUID 查询实验性UUID需前往CMake的Github仓库或Gitlab仓库，在项目的Help/dev/experimental.rst文件中，可以找到C&#43;&#43; import std support栏目，提供了相关内容。
 需要注意的是，此UUID与CMake版本挂钩，必须使用和你版本匹配的Tag下的UUID。你可以在本地通过cmake --version命令查看本地CMake版本。
 最后，生成配置时指定生成器为ninga。
-cmake -B build -G &#34;Ninja&#34; ">
+cmake -B build -G &#34;Ninja&#34; 关于windows上编译 上述操作须在vs2022的环境下，可以在Microsoft.PowerShell_profile.ps1中增加下面的函数
+function vs2022 { $vsPath = &amp; &#34;${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe&#34; ` -version 17.0 -products * -property installationPath if (-not $vsPath) { Write-Error &#34;Visual Studio 2022 not found!&#34; return } &amp; &#34;$vsPath\Common7\Tools\Launch-VsDevShell.ps1&#34; -SkipAutomaticLocation -Arch amd64 -HostArch amd64 } 然后在执行cmake命令前执行下vs2022。">
   <meta property="og:locale" content="zh">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -172,7 +189,23 @@ add_executable(hello main.cpp)
 
 最后，生成配置时指定生成器为ninga。
 cmake -B build -G &#34;Ninja&#34;
-">
+
+
+
+
+  关于windows上编译
+  上述操作须在vs2022的环境下，可以在Microsoft.PowerShell_profile.ps1中增加下面的函数
+function vs2022 {
+    $vsPath = &amp; &#34;${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe&#34; `
+        -version 17.0 -products * -property installationPath
+    if (-not $vsPath) {
+        Write-Error &#34;Visual Studio 2022 not found!&#34;
+        return
+    }
+
+    &amp; &#34;$vsPath\Common7\Tools\Launch-VsDevShell.ps1&#34; -SkipAutomaticLocation -Arch amd64 -HostArch amd64
+}
+然后在执行cmake命令前执行下vs2022。">
 
 
 <script type="application/ld+json">
@@ -201,12 +234,12 @@ cmake -B build -G &#34;Ninja&#34;
   "@type": "BlogPosting",
   "headline": "C++ Module",
   "name": "C\u002b\u002b Module",
-  "description": "通过cmake来构建C++ Module的项目 编译环境 cmake版本=4.0.3 clang或gcc或者vs2022(注意下支持c++23的版本) ninga 使用STD Module 现有目录如下\n项目根目录/ │ ├── CMakeLists.txt │ └── main.cpp // main.cpp import std; int main() { std::println(\u0026#34;Hello, C++23 STD Module!\u0026#34;); } 要让其编译成功，需要设置CMakeLists.txt的变量：\n设置CXX_MODULE_STD或CMAKE_CXX_MODULE_STD变量为ON。 C++版本设为23。 设置STD Module的实验性UUID。 cmake_minimum_required(VERSION 4.0.3) set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD \u0026#34;d0edc3af-4c50-42ea-a356-e2862fe7a444\u0026#34;) project(hello) # 使用全局变量 set(CMAKE_CXX_MODULE_STD ON) set(CMAKE_CXX_STANDARD 23) add_executable(hello main.cpp) 关于cmake模块支持的文档，可以查看\n关于cmake实验性UUID 查询实验性UUID需前往CMake的Github仓库或Gitlab仓库，在项目的Help/dev/experimental.rst文件中，可以找到C++ import std support栏目，提供了相关内容。\n需要注意的是，此UUID与CMake版本挂钩，必须使用和你版本匹配的Tag下的UUID。你可以在本地通过cmake --version命令查看本地CMake版本。\n最后，生成配置时指定生成器为ninga。\ncmake -B build -G \u0026#34;Ninja\u0026#34; ",
+  "description": "通过cmake来构建C++ Module的项目 编译环境 cmake版本=4.0.3 clang或gcc或者vs2022(注意下支持c++23的版本) ninga 使用STD Module 现有目录如下\n项目根目录/ │ ├── CMakeLists.txt │ └── main.cpp // main.cpp import std; int main() { std::println(\u0026#34;Hello, C++23 STD Module!\u0026#34;); } 要让其编译成功，需要设置CMakeLists.txt的变量：\n设置CXX_MODULE_STD或CMAKE_CXX_MODULE_STD变量为ON。 C++版本设为23。 设置STD Module的实验性UUID。 cmake_minimum_required(VERSION 4.0.3) set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD \u0026#34;d0edc3af-4c50-42ea-a356-e2862fe7a444\u0026#34;) project(hello) # 使用全局变量 set(CMAKE_CXX_MODULE_STD ON) set(CMAKE_CXX_STANDARD 23) add_executable(hello main.cpp) 关于cmake模块支持的文档，可以查看\n关于cmake实验性UUID 查询实验性UUID需前往CMake的Github仓库或Gitlab仓库，在项目的Help/dev/experimental.rst文件中，可以找到C++ import std support栏目，提供了相关内容。\n需要注意的是，此UUID与CMake版本挂钩，必须使用和你版本匹配的Tag下的UUID。你可以在本地通过cmake --version命令查看本地CMake版本。\n最后，生成配置时指定生成器为ninga。\ncmake -B build -G \u0026#34;Ninja\u0026#34; 关于windows上编译 上述操作须在vs2022的环境下，可以在Microsoft.PowerShell_profile.ps1中增加下面的函数\nfunction vs2022 { $vsPath = \u0026amp; \u0026#34;${env:ProgramFiles(x86)}\\Microsoft Visual Studio\\Installer\\vswhere.exe\u0026#34; ` -version 17.0 -products * -property installationPath if (-not $vsPath) { Write-Error \u0026#34;Visual Studio 2022 not found!\u0026#34; return } \u0026amp; \u0026#34;$vsPath\\Common7\\Tools\\Launch-VsDevShell.ps1\u0026#34; -SkipAutomaticLocation -Arch amd64 -HostArch amd64 } 然后在执行cmake命令前执行下vs2022。\n",
   "keywords": [
     
   ],
-  "articleBody": "通过cmake来构建C++ Module的项目 编译环境 cmake版本=4.0.3 clang或gcc或者vs2022(注意下支持c++23的版本) ninga 使用STD Module 现有目录如下\n项目根目录/ │ ├── CMakeLists.txt │ └── main.cpp // main.cpp import std; int main() { std::println(\"Hello, C++23 STD Module!\"); } 要让其编译成功，需要设置CMakeLists.txt的变量：\n设置CXX_MODULE_STD或CMAKE_CXX_MODULE_STD变量为ON。 C++版本设为23。 设置STD Module的实验性UUID。 cmake_minimum_required(VERSION 4.0.3) set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD \"d0edc3af-4c50-42ea-a356-e2862fe7a444\") project(hello) # 使用全局变量 set(CMAKE_CXX_MODULE_STD ON) set(CMAKE_CXX_STANDARD 23) add_executable(hello main.cpp) 关于cmake模块支持的文档，可以查看\n关于cmake实验性UUID 查询实验性UUID需前往CMake的Github仓库或Gitlab仓库，在项目的Help/dev/experimental.rst文件中，可以找到C++ import std support栏目，提供了相关内容。\n需要注意的是，此UUID与CMake版本挂钩，必须使用和你版本匹配的Tag下的UUID。你可以在本地通过cmake --version命令查看本地CMake版本。\n最后，生成配置时指定生成器为ninga。\ncmake -B build -G \"Ninja\" ",
-  "wordCount" : "60",
+  "articleBody": "通过cmake来构建C++ Module的项目 编译环境 cmake版本=4.0.3 clang或gcc或者vs2022(注意下支持c++23的版本) ninga 使用STD Module 现有目录如下\n项目根目录/ │ ├── CMakeLists.txt │ └── main.cpp // main.cpp import std; int main() { std::println(\"Hello, C++23 STD Module!\"); } 要让其编译成功，需要设置CMakeLists.txt的变量：\n设置CXX_MODULE_STD或CMAKE_CXX_MODULE_STD变量为ON。 C++版本设为23。 设置STD Module的实验性UUID。 cmake_minimum_required(VERSION 4.0.3) set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD \"d0edc3af-4c50-42ea-a356-e2862fe7a444\") project(hello) # 使用全局变量 set(CMAKE_CXX_MODULE_STD ON) set(CMAKE_CXX_STANDARD 23) add_executable(hello main.cpp) 关于cmake模块支持的文档，可以查看\n关于cmake实验性UUID 查询实验性UUID需前往CMake的Github仓库或Gitlab仓库，在项目的Help/dev/experimental.rst文件中，可以找到C++ import std support栏目，提供了相关内容。\n需要注意的是，此UUID与CMake版本挂钩，必须使用和你版本匹配的Tag下的UUID。你可以在本地通过cmake --version命令查看本地CMake版本。\n最后，生成配置时指定生成器为ninga。\ncmake -B build -G \"Ninja\" 关于windows上编译 上述操作须在vs2022的环境下，可以在Microsoft.PowerShell_profile.ps1中增加下面的函数\nfunction vs2022 { $vsPath = \u0026 \"${env:ProgramFiles(x86)}\\Microsoft Visual Studio\\Installer\\vswhere.exe\" ` -version 17.0 -products * -property installationPath if (-not $vsPath) { Write-Error \"Visual Studio 2022 not found!\" return } \u0026 \"$vsPath\\Common7\\Tools\\Launch-VsDevShell.ps1\" -SkipAutomaticLocation -Arch amd64 -HostArch amd64 } 然后在执行cmake命令前执行下vs2022。\n",
+  "wordCount" : "99",
   "inLanguage": "zh",
   "datePublished": "2025-07-13T17:25:37+08:00",
   "dateModified": "2025-07-13T17:25:37+08:00",
@@ -372,7 +405,27 @@ cmake -B build -G &#34;Ninja&#34;
 </blockquote>
 <p>最后，生成配置时指定生成器为<code>ninga</code>。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cmake -B build -G <span class="s2">&#34;Ninja&#34;</span>
-</span></span></code></pre></div>
+</span></span></code></pre></div><blockquote>
+
+
+<p><details >
+  <summary markdown="span"><strong>关于<code>windows</code>上编译</strong></summary>
+  <p>上述操作须在<code>vs2022</code>的环境下，可以在<code>Microsoft.PowerShell_profile.ps1</code>中增加下面的函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">function</span> vs2022 <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vsPath</span> <span class="o">=</span> <span class="p">&amp;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">env</span><span class="p">:</span><span class="nv">ProgramFiles</span><span class="p">(x86)</span><span class="si">}</span><span class="s2">\Microsoft Visual Studio\Installer\vswhere.exe&#34;</span> <span class="sb">`</span>
+</span></span><span class="line"><span class="cl">        -version 17.0 -products * -property installationPath
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span>-not <span class="nv">$vsPath</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        Write-Error <span class="s2">&#34;Visual Studio 2022 not found!&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">&amp;</span> <span class="s2">&#34;</span><span class="nv">$vsPath</span><span class="s2">\Common7\Tools\Launch-VsDevShell.ps1&#34;</span> -SkipAutomaticLocation -Arch amd64 -HostArch amd64
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>然后在执行<code>cmake</code>命令前执行下<code>vs2022</code>。</p>
+
+</details></p>
+</blockquote>
+
 
   </div>
 
